@@ -43,6 +43,7 @@ _gulp.task('uncss', function(){
 _gulp.task('watch', function () {
 	_gulp.watch('src/sass/*.scss',['compass']);
 	_gulp.watch('src/css/*.css', ['uncss']);
+	_gulp.watch('src/**/*.+(jpg|jpeg|png|gif|svg)', ['imagemin']);
 });
 _gulp.task('webserver', function() {
 	_gulp.src('bin')
@@ -50,5 +51,15 @@ _gulp.task('webserver', function() {
 			livereload: true
 		}));
 });
+_gulp.task( 'imagemin', function(){
+	var srcGlob = 'src/**/*.+(jpg|jpeg|png|gif|svg)';
+	var dstGlob = 'bin';
+	var imageminOptions = {
+		optimizationLevel: 7
+	};
 
+	_gulp.src( srcGlob )
+		.pipe(_imagemin( imageminOptions ))
+		.pipe(_gulp.dest( dstGlob ));
+});
 _gulp.task('default',['webserver','watch']);
