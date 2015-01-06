@@ -5,7 +5,8 @@ var _gulp = require('gulp'),
 	_gulpif = require('gulp-if'),
 	_uncss = require('gulp-uncss'),
 	_glob = require('glob'),
-	_webserver = require('gulp-webserver');
+	_webserver = require('gulp-webserver'),
+	_imagemin = require('gulp-imagemin');
 
 var compileFlag = false;
 var errHandler = function(err){
@@ -19,6 +20,7 @@ var errHandler = function(err){
 	this.emit('end');
 }
 _gulp.task('compass', function(){
+	compileFlag=true;
 	_gulp.src('src/sass/*.scss')
 		.pipe(_plumber({errorHandler: _notify.onError('<%= error.message %>')}))
 		.pipe(_compass({
@@ -27,10 +29,13 @@ _gulp.task('compass', function(){
 			css: 'src/css/',
 			sass: 'src/sass/'
 		}))
+	if(compileFlag){
+		_notify.onError('Success');
+	}
 });
 _gulp.task('uncss', function(){
-	_gulp.src('bin/css/*.css')
-		.pipe(uncss({
+	_gulp.src('src/css/*.css')
+		.pipe(_uncss({
 			html: _glob.sync('bin/**/*.html')
 		}))
 		.pipe(_gulp.dest('bin/css/'));
