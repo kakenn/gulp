@@ -1,11 +1,11 @@
-var _gulp = require('gulp');
-var _compass = require('gulp-compass');
-var _notify = require('gulp-notify');
-var _plumber = require('gulp-plumber');
-var _gulpif = require('gulp-if');
-var _uncss = require('gulp-uncss');
-var _glob = require('glob');
-var _connect = require('gulp-connect');
+var _gulp = require('gulp'),
+	_compass = require('gulp-compass'),
+	_notify = require('gulp-notify'),
+	_plumber = require('gulp-plumber'),
+	_gulpif = require('gulp-if'),
+	_uncss = require('gulp-uncss'),
+	_glob = require('glob'),
+	_webserver = require('gulp-webserver');
 
 var compileFlag = false;
 var errHandler = function(err){
@@ -38,17 +38,12 @@ _gulp.task('uncss', function(){
 _gulp.task('watch', function () {
 	_gulp.watch('src/sass/*.scss',['compass']);
 	_gulp.watch('src/css/*.css', ['uncss']);
-	_gulp.watch('bin/*.html', ['html']);
 });
-_gulp.task('connect', function() {
-	_connect.server({
-		port: 8888,
-		root: 'bin',
-		livereload: true
-	});
+_gulp.task('webserver', function() {
+	_gulp.src('bin')
+		.pipe(_webserver({
+			livereload: true
+		}));
 });
-_gulp.task('html', function () {
-	_gulp.src('bin/*.html')
-		.pipe(_connect.reload());
-});
-_gulp.task('default',['connect','watch']);
+
+_gulp.task('default',['webserver','watch']);
