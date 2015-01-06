@@ -15,6 +15,7 @@
     "glob": "^4.0.6",
     "gulp": "^3.8.10",
     "gulp-compass": "^2.0.1",
+    "gulp-connect": "^2.2.0",
     "gulp-if": "^1.2.5",
     "gulp-notify": "^2.0.1",
     "gulp-plumber": "^0.6.6",
