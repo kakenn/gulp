@@ -3,7 +3,24 @@ const $ = require("gulp-load-plugins")();
 const browserSync = require('browser-sync').create();
 const rimraf = require('rimraf');
 const runSequence = require('run-sequence');
- 
+const jpegtran = require('imagemin-jpegtran');
+const optipng = require('imagemin-optipng');
+
+gulp.task('imagemin', function(){
+    gulp.src('src/image/*.(jpg|jpeg)')
+        .pipe(changed('src/image'))
+        .pipe(jpegtran()())
+        .pipe(gulp.dest('./dist/image'));
+    gulp.src('src/image/*.png')
+        .pipe(changed('src/image'))
+        .pipe(optipng()())
+        .pipe(gulp.dest('./dist/image'));
+    gulp.src('src/image/*.(gif|ico|svg)')
+        .pipe(changed('src/image'))
+        .pipe($.imagemin({optimizationLevel: 7}))
+        .pipe(gulp.dest('./dist/image'));
+});
+
 gulp.task('clean', function (cb) {
   rimraf('./dist', cb);
 });
@@ -53,4 +70,5 @@ gulp.task('default',runSequence('clean',['ejs','sass','babel']), function() {
    gulp.watch('./src/sass/**/*.scss',['sass','reload']);
    gulp.watch('./src/script/**/*.js',['babel','reload']);
    gulp.watch(["./src/**/*.ejs",'!src/**/_*.ejs'], ['ejs','reload']);
+   gulp.watch('src/image/*.(jpg|jpeg|gif|png|svg)', ['imagemin','reload']);
 });
