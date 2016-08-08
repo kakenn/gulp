@@ -61,7 +61,7 @@ gulp.task("babel",function(){
         .pipe(gulp.dest('./dist/script'));
 });
 
-gulp.task('default',runSequence('clean',['ejs','sass','babel']), function() {
+gulp.task('default',runSequence('clean',['ejs','sass','babel','imagemin']), function() {
    browserSync.init({
        server: {
            baseDir: "./dist/"
