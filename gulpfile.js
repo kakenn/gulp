@@ -8,15 +8,15 @@ const optipng = require('imagemin-optipng');
 
 gulp.task('imagemin', function(){
     gulp.src('src/image/*.(jpg|jpeg)')
-        .pipe(changed('src/image'))
+        .pipe($.changed('src/image'))
         .pipe(jpegtran()())
         .pipe(gulp.dest('./dist/image'));
     gulp.src('src/image/*.png')
-        .pipe(changed('src/image'))
+        .pipe($.changed('src/image'))
         .pipe(optipng()())
         .pipe(gulp.dest('./dist/image'));
     gulp.src('src/image/*.(gif|ico|svg)')
-        .pipe(changed('src/image'))
+        .pipe($.changed('src/image'))
         .pipe($.imagemin({optimizationLevel: 7}))
         .pipe(gulp.dest('./dist/image'));
 });
