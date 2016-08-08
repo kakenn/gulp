@@ -9,6 +9,7 @@ coverage
 .idea
 sandbox
 test/out-fixtures/*
+dist/*
 test/watch-*.txt
 gulp.1
 .sass-cache
