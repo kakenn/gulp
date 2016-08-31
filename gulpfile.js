@@ -71,8 +71,8 @@ gulp.task('default',runSequence('clean',['ejs','sass','babel','imagemin']), func
            baseDir: "./dist/"
        }
    });
-   gulp.watch('./src/sass/**/*.scss',['sass','reload']);
-   gulp.watch('./src/script/**/*.js',['babel','reload']);
-   gulp.watch(["./src/**/*.ejs",'!src/**/_*.ejs'], ['ejs','reload']);
-   gulp.watch('src/image/*.(jpg|jpeg|gif|png|svg)', ['imagemin','reload']);
+   $.watch('./src/sass/**/*.scss',['sass','reload']);
+   $.watch('./src/script/**/*.js',['babel','reload']);
+   $.watch(["./src/**/*.ejs",'!src/**/_*.ejs'], ['ejs','reload']);
+   $.watch('src/image/*.(jpg|jpeg|gif|png|svg)', ['imagemin','reload']);
 });
