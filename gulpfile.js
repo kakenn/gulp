@@ -7,6 +7,9 @@ const jpegtran = require('imagemin-jpegtran');
 const optipng = require('imagemin-optipng');
 
 gulp.task('imagemin', function(){
+  gulp.src('./src/image/*',{base:'./src/image/'})
+      .pipe(gulp.dest('./dist/image'));
+  /*
     gulp.src('src/image/*.(jpg|jpeg)')
         .pipe($.changed('src/image'))
         .pipe(jpegtran()())
@@ -19,6 +22,7 @@ gulp.task('imagemin', function(){
         .pipe($.changed('src/image'))
         .pipe($.imagemin({optimizationLevel: 7}))
         .pipe(gulp.dest('./dist/image'));
+  */
 });
 
 gulp.task('clean', function (cb) {
