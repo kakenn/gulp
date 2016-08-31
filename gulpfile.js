@@ -57,6 +57,12 @@ gulp.task("ejs",function(){
 });
 gulp.task("babel",function(){
   return gulp.src('./src/script/**/*.js')
+        .pipe($.plumber({
+          handleError: function (err) {
+              console.log(err);
+              this.emit('end');
+          }
+        }))
         .pipe($.sourcemaps.init())
         .pipe($.babel({
             presets: ['es2015']
@@ -71,8 +77,16 @@ gulp.task('default',runSequence('clean',['ejs','sass','babel','imagemin']), func
            baseDir: "./dist/"
        }
    });
-   $.watch('./src/sass/**/*.scss',['sass','reload']);
-   $.watch('./src/script/**/*.js',['babel','reload']);
-   $.watch(["./src/**/*.ejs",'!src/**/_*.ejs'], ['ejs','reload']);
-   $.watch('src/image/*.(jpg|jpeg|gif|png|svg)', ['imagemin','reload']);
+   $.watch(['./src/sass/**/*.scss'],()=>{
+     return gulp.start(['sass','reload']);
+   });
+   $.watch(['./src/script/**/*.js'],()=>{
+     return gulp.start(['babel','reload']);
+   });
+   $.watch(["./src/**/*.ejs",'!src/**/_*.ejs'], ()=>{
+     return gulp.start(['ejs','reload']);
+   });
+   $.watch(['src/image/*.(jpg|jpeg|gif|png|svg)'], ()=>{
+     return gulp.start(['imagemin','reload']);
+   });
 });
