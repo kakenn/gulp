@@ -1,0 +1,14 @@
+{
+  "siteTitle": "サイトタイトル",
+  "description": "サイト説明",
+  "keyword": "キーワード1,キーワード2",
+  "siteUrl": "http://dummy.com/",
+  "ogp":{
+    "image": "http://dummy.com/hoge.jpg",
+    "type": "website",
+    "fb:app_id": "",
+    "article:publisher": "",
+    "twitter:card": "summary_large_image",
+    "twitter:site": ""
+  }
+}

@@ -1,0 +1,21 @@
+<%
+  var pageKeyword = "インデックスのキーワード";
+  var pageDescription = "インデックスの説明";
+  var pageTitle = "インデックス";
+
+  var pageOgp = ogp;
+  pageOgp.image = siteUrl + "hoge.jpg";
+  pageOgp.type = "website";
+  pageOgp["fb:app_id"] = "";
+  pageOgp["article:publisher"] = "";
+  pageOgp["twitter:card"] = "summary_large_image";
+  pageOgp["twitter:site"] = "";
+%>
+<%- include('./component/common/header', {
+  title: pageTitle,
+  keyword: pageKeyword,
+  description: pageDescription,
+  pageOgp:pageOgp
+}); %>
+<h1>テストだよ2</h1>
+<%- include('./component/common/footer'); %>

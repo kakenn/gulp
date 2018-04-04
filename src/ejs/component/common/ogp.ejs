@@ -1,0 +1,24 @@
+  <%
+    if (typeof ogp === 'undefined') { var ogp = ogp; }
+    if (typeof title === 'undefined' || title === '') { var pageTitle = siteTitle; }
+    if (typeof url === 'undefined') { var url = siteUrl; }
+  %>
+  <meta property="og:title" content="<%= pageTitle %>" />
+  <meta property="og:type" content="<%= ogp.type %>" />
+  <meta property="og:url" content="<%= url %>" />
+  <meta property="og:image" content="<%= ogp.image %>" />
+  <meta property="og:site_name"  content="<%= siteTitle %>" />
+  <meta property="og:description" content="<%= description %>" />
+
+<% if (ogp["fb:app_id"] !== "") { %>
+  <meta property="fb:app_id" content="<%= ogp["fb:app_id"] %>" />
+<% } %>
+<% if (ogp["article:publisher"] !== "") { %>
+  <meta property="article:publisher" content="<%= ogp["article:publisher"] %>" />
+<% } %>
+
+  <meta name="twitter:card" content="<%= ogp["twitter:card"] %>" />
+<% if (ogp["twitter:site"] !== "") { %>
+  <meta name="twitter:site" content="<%= ogp["twitter:site"] %>" />
+<% } %>
+  <meta name="twitter:title" content="<%= pageTitle %>" />
