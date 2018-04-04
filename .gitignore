@@ -159,3 +159,4 @@ typings/
 .env
 
 dist/
+.ides/
